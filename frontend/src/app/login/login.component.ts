@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit{
     }
     this.userAuthService.login(payload)
       .then(({data}) => {
-        localStorage.setItem('token', data.token)
+        localStorage.setItem('token', data.access_token)
         this.router.navigateByUrl('/dashboard')
         return data
       }).catch(error => {
