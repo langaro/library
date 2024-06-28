@@ -10,7 +10,8 @@ trait GenerateSlug
 {
     public static function bootGenerateSlug(): void
     {
-        static::saving(function ($model) {
+        static::saving(function ($model)
+        {
             $slug = Str::slug($model->slug);
             $model->slug = $model->generateUniqueSlug($slug);
         });
@@ -21,14 +22,16 @@ trait GenerateSlug
         $originalSlug = $slug;
         $slugNumber = null;
 
-        if (preg_match('/-(\d+)$/', $slug, $matches)) {
+        if (preg_match('/-(\d+)$/', $slug, $matches))
+        {
             $slugNumber = $matches[1];
             $slug = Str::replaceLast("-$slugNumber", '', $slug);
         }
 
         $existingSlugs = $this->getExistingSlugs($slug, $this->getTable());
 
-        if (!in_array($slug, $existingSlugs)) {
+        if (!in_array($slug, $existingSlugs))
+        {
             return $slug . ($slugNumber ? "-$slugNumber" : '');
         }
 
@@ -36,10 +39,12 @@ trait GenerateSlug
         $i = $slugNumber ? ($slugNumber + 1) : 1;
         $uniqueSlugFound = false;
 
-        while (!$uniqueSlugFound) {
+        while (!$uniqueSlugFound)
+        {
             $newSlug = $slug . '-' . $i;
 
-            if (!in_array($newSlug, $existingSlugs)) {
+            if (!in_array($newSlug, $existingSlugs))
+            {
                 return $newSlug;
             }
 

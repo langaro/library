@@ -11,18 +11,20 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-
     use HttpResponses;
 
     public function login(LoginRequest $request)
     {
-        try {
-            if (Auth::attempt($request->only('email', 'password'))) {
+        try
+        {
+            if (Auth::attempt($request->only('email', 'password')))
+            {
                 return response()->json([
-                    'access_token' => $request->user()->createToken('token', ['*'], now()->addDay())->plainTextToken
+                    'access_token' => $request->user()->createToken('token', ['*'], now()->addDay())->plainTextToken,
                 ]);
             }
-        } catch (\Exception $e) {
+        } catch (\Exception $e)
+        {
             return response(status: 500);
         }
 
@@ -31,18 +33,21 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        try {
+        try
+        {
 
-            if (!$request->validated()) {
+            if (!$request->validated())
+            {
                 return response(content: $request->errors(), status: 400);
             }
 
             $user = User::create($request->only('name', 'email') + ['password' => bcrypt($request->password)]);
 
             return response()->json([
-                'access_token' => $user->createToken('token', ['*'], now()->addDay())->plainTextToken
+                'access_token' => $user->createToken('token', ['*'], now()->addDay())->plainTextToken,
             ]);
-        } catch (\Exception $e) {
+        } catch (\Exception $e)
+        {
             return response(status: 500);
         }
 
@@ -50,22 +55,25 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-        try {
+        try
+        {
             return $request->user()->only('name', 'email');
-        } catch (\Exception $e) {
+        } catch (\Exception $e)
+        {
             return response(status: 500);
         }
     }
 
     public function logout(Request $request)
     {
-        try {
+        try
+        {
             $request->user()->currentAccessToken()->delete();
+
             return response(status: 200);
-        } catch (\Exception $e) {
+        } catch (\Exception $e)
+        {
             return response(status: 500);
         }
     }
-
-
 }

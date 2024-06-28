@@ -11,7 +11,6 @@ class UserController extends Controller
     public function index()
     {
 
-
         return UserResource::collection(User::all());
 
     }
@@ -20,7 +19,6 @@ class UserController extends Controller
     {
         //
     }
-
 
     public function store(Request $request)
     {

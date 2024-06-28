@@ -21,8 +21,8 @@ class RegisterRequest extends FormRequest
             'password' => [
                 'required',
                 Password::defaults(),
-                'confirmed'
-            ]
+                'confirmed',
+            ],
         ];
     }
 }

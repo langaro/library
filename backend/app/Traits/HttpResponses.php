@@ -9,13 +9,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 trait HttpResponses
 {
-
     public function response(string $message, string|int $status, array|Model|JsonResource $data = []): JsonResponse
     {
         return response()->json([
             'message' => $message,
             'status' => $status,
-            'data' => $data
+            'data' => $data,
         ], $status);
     }
 
@@ -26,7 +25,7 @@ trait HttpResponses
             'message' => $message,
             'status' => $status,
             'errors' => $errors,
-            'data' => $data
+            'data' => $data,
         ], $status);
     }
 }
