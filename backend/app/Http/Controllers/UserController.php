@@ -12,7 +12,6 @@ class UserController extends Controller
     {
 
         return UserResource::collection(User::all());
-
     }
 
     public function create()
