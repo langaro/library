@@ -2,7 +2,7 @@
   <div class="col-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title mb-4">Sign In</h5>
+        <h5 class="card-title mb-4">Entrar no Sistema</h5>
         <form >
 
           <p *ngIf="validationErrors.length > 0" class='text-center '>
@@ -12,7 +12,7 @@
             <label
               for="email"
               class="form-label">
-              Email address
+              Email
             </label>
             <input
               type="email"
@@ -26,7 +26,7 @@
           <div class="mb-3">
             <label
               for="password"
-              class="form-label">Password
+              class="form-label">Senha
             </label>
             <input
               type="password"
@@ -43,7 +43,7 @@
               (click)="loginAction()"
               type="button"
               class="btn btn-primary btn-block">Login</button>
-            <p class="text-center">Don't have account? <a routerLink="/register">Register here</a></p>
+            <p class="text-center">Ainda não possui uma conta? <a routerLink="/register">Crie aqui!</a></p>
           </div>
         </form>
       </div>

@@ -7,7 +7,7 @@
           <div class="mb-3">
             <label
               for="name"
-              class="form-label">Name
+              class="form-label">Nome
             </label>
             <input
               type="text"
@@ -26,7 +26,7 @@
             <label
               for="email"
               class="form-label">
-              Email address
+              Email
             </label>
             <input
               type="email"
@@ -45,7 +45,7 @@
           <div class="mb-3">
             <label
               for="password"
-              class="form-label">Password
+              class="form-label">Senha
             </label>
             <input
               type="password"
@@ -64,7 +64,7 @@
           <div class="mb-3">
             <label
               for="confirm-password"
-              class="form-label">Confirm Password
+              class="form-label">Confirmação de Senha
             </label>
             <input
               type="password"
@@ -80,8 +80,8 @@
               [disabled]="isSubmitting || (password.length <= 0 || email.length <= 0 || confirmPassword.length <= 0)"
               (click)="registerAction()"
               type="button"
-              class="btn btn-primary btn-block">Register Now</button>
-            <p className="text-center">Have already an account <a routerLink="/login">Login here</a>
+              class="btn btn-primary btn-block">Registrar-se agora</button>
+            <p className="text-center">Já possui uma conta? <a routerLink="/login">Login aqui</a>
             </p>
           </div>
         </form>
