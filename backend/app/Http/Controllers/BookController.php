@@ -22,6 +22,7 @@ class BookController extends Controller
     {
         $query = $request->query();
         $perPage = $request->input('per_page', 15);
+
         return $this->service->index($query, $perPage);
     }
 
