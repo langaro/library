@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class BookService
 {
-    public function index(array $data): Collection
+    public function index(): Collection
     {
         return Book::all();
     }
