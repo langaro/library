@@ -2,52 +2,39 @@
 
 namespace App\Services;
 
-use App\Models\Book;
+use App\Filters\ModelFilters;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class BookService
 {
-    public function index(array $filters): Collection
+    public function __construct(
+        public Model $model,
+        public ModelFilters $filters
+    ) {
+
+    }
+
+    public function index(array $filters = []): Collection
     {
-        if (empty($filters))
+        $query = $this->model->query();
+
+        if (!empty($filters))
         {
-            return Book::all();
-        }
-
-        $query = Book::query();
-
-        if (!empty($filters['title'])) {
-            $query->where('title', 'like', '%' . $filters['title'] . '%');
-        }
-
-        if (!empty($filters['description'])) {
-            $query->where('description', 'like', '%' . $filters['description'] . '%');
-        }
-
-        if (!empty($filters['author'])) {
-            $query->where('author', 'like', '%' . $filters['author'] . '%');
-        }
-
-        if (!empty($filters['pages_from']) && !empty($filters['pages_to'])) {
-            $query->whereBetween('pages', [$filters['pages_from'], $filters['pages_to']]);
-        }
-
-        if (!empty($filters['published_from']) && !empty($filters['published_to'])) {
-            $query->whereBetween('published_at', [$filters['published_from'], $filters['published_to']]);
+            $query = $this->filters->apply($query, $filters);
         }
 
         return $query->get();
-
     }
 
-    public function store(array $data): Book
+    public function store(array $data): Model
     {
-        return Book::create($data);
+        return $this->model->create($data);
     }
 
-    public function update(array $data, int $id): Book
+    public function update(array $data, int $id): Model
     {
-        $book = Book::find($id);
+        $book = $this->model->find($id);
         $book->update($data);
 
         return $book;
@@ -55,7 +42,6 @@ class BookService
 
     public function destroy(int $id): bool
     {
-
-        return Book::destroy($id);
+        return $this->model->destroy($id);
     }
 }
