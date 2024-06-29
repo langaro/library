@@ -15,9 +15,9 @@ class BookController extends Controller
     ) {
     }
 
-    public function index(): Collection
+    public function index(Request $request): Collection
     {
-        return $this->service->index();
+        return $this->service->index($request->query());
     }
 
     public function store(Request $request): Book
