@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Filters\ModelFilters;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 
 class BookService
@@ -15,7 +15,7 @@ class BookService
 
     }
 
-    public function index(array $filters = []): Collection
+    public function index(array $filters = [], int $perPage = 10): LengthAwarePaginator
     {
         $query = $this->model->query();
 
@@ -24,7 +24,7 @@ class BookService
             $query = $this->filters->apply($query, $filters);
         }
 
-        return $query->get();
+        return $query->paginate($perPage);
     }
 
     public function store(array $data): Model

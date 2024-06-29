@@ -6,7 +6,7 @@ use App\Data\BookData;
 use App\Filters\ModelFilters;
 use App\Models\Book;
 use App\Services\BookService;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -18,9 +18,11 @@ class BookController extends Controller
 
     }
 
-    public function index(Request $request): Collection
+    public function index(Request $request): LengthAwarePaginator
     {
-        return $this->service->index($request->query());
+        $query = $request->query();
+        $perPage = $request->input('per_page', 15);
+        return $this->service->index($query, $perPage);
     }
 
     public function store(Request $request): Model
