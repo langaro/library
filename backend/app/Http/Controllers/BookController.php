@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Data\BookData;
 use App\Models\Book;
 use App\Services\BookService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -12,6 +13,11 @@ class BookController extends Controller
     public function __construct(
         public BookService $service = new BookService()
     ) {
+    }
+
+    public function index(): Collection
+    {
+        return $this->service->index([]);
     }
 
     public function store(Request $request): Book
